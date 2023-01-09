@@ -1,0 +1,14 @@
+.base-btn {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.base-btn:hover {
+  filter: brightness(1.1);
+}

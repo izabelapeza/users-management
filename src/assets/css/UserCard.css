@@ -1,0 +1,57 @@
+.user-card {
+  display: grid;
+  grid-template-columns: auto 1fr 20px;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 0.25rem;
+  padding: 0.75rem 0.75rem;
+  box-shadow: rgba(149, 157, 165, 0.15) 0px 8px 24px;
+}
+
+.user-card__info {
+  display: grid;
+  align-items: center;
+}
+
+.user-card__info h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+.user-card__info p {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.user-card__delete-btn {
+  border: none;
+  color: rgb(45, 45, 45);
+  background-color: white;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  height: 1.5rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+
+.user-card__delete-btn:hover {
+  color: rgb(120, 120, 120);
+}
+
+.user-card__modal {
+  max-width: 90vw;
+  width: 420px;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.user-card__modal p {
+  margin: 0;
+}

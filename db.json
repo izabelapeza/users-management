@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jdoe@gmail.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Harry",
+      "lastName": "Potter",
+      "email": "hp@gmail.com"
+    },
+    {
+      "id": 3,
+      "firstName": "Jon",
+      "lastName": "Snow",
+      "email": "iknownothing@gmail.com@gmail.com"
+    }
+  ]
+}
