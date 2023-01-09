@@ -12,7 +12,7 @@ interface Props {
 
 function AddUserBtn(props: Props) {
   const [showModal, setShowModal] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
   const [newUserFirstName, setNewUserFirstName] = useState("");
   const [newUserLastName, setNewUserLastName] = useState("");
   const [newUserEmail, setNewUserEmail] = useState("");
@@ -20,15 +20,30 @@ function AddUserBtn(props: Props) {
 
   const emailValidation = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-  const addUser = () => {
+  const validateUser = () => {
+    let errorsList = [];
+
     if (!newUserFirstName || !newUserLastName || !newUserEmail) {
-      setError("Required data missing");
-      return;
-    } else if (!emailValidation.test(newUserEmail)) {
-      setError("Invalid email");
-      return;
+      errorsList.push("Required data missing");
+    }
+    if (newUserEmail && !emailValidation.test(newUserEmail)) {
+      errorsList.push("Invalid email");
+    }
+    if (newUserFirstName.length > 35) {
+      errorsList.push("The maximum first name length is 35");
+    }
+    if (newUserLastName.length > 35) {
+      errorsList.push("The maximum last name length is 35");
+    }
+    if (newUserEmail.length > 35) {
+      errorsList.push("The maximum email length is 60");
     }
 
+    if (errorsList.length > 0) setErrors(errorsList);
+    else addUser();
+  };
+
+  const addUser = () => {
     setIsLoading(true);
 
     axios
@@ -41,16 +56,16 @@ function AddUserBtn(props: Props) {
         props.getUsersList();
         setShowModal(false);
       })
-      .catch((error) => setError(error.message))
+      .catch((error) => setErrors((prev) => [...prev, error.message]))
       .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
-    setError(null);
+    setErrors([]);
   }, [newUserFirstName, newUserLastName, newUserEmail]);
 
   const openModal = () => {
-    setError(null);
+    setErrors([]);
     setNewUserFirstName("");
     setNewUserLastName("");
     setNewUserEmail("");
@@ -61,7 +76,7 @@ function AddUserBtn(props: Props) {
     if (e.key === "Enter") {
       e.preventDefault();
       e.stopPropagation();
-      addUser();
+      validateUser();
     }
   };
   return (
@@ -77,7 +92,7 @@ function AddUserBtn(props: Props) {
         onClose={() => {
           setShowModal(false);
         }}
-        onSubmit={addUser}
+        onSubmit={validateUser}
         isLoading={isLoading}
       >
         <>
@@ -112,9 +127,15 @@ function AddUserBtn(props: Props) {
               />
             </label>
           </form>
-          {error ? (
+          {errors.length ? (
             <div className="add-user__alert">
-              <BaseAlert alertText={error} alertType="error"></BaseAlert>
+              {errors.map((error, id) => (
+                <BaseAlert
+                  key={id}
+                  alertText={error}
+                  alertType="error"
+                ></BaseAlert>
+              ))}
             </div>
           ) : (
             <></>

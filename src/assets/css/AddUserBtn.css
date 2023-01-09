@@ -47,6 +47,8 @@
 .add-user__alert {
   margin-top: 1rem;
   max-width: 240px;
+  display: grid;
+  gap: 0.25rem;
 }
 
 .add-user__h2 {
