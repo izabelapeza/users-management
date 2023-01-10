@@ -3,8 +3,8 @@ import axios from "axios";
 import { MdOutlinePersonAdd } from "react-icons/md";
 import BaseButton from "./BaseComponents/BaseButton";
 import BaseModal from "./BaseComponents/BaseModal";
-import BaseAlert from "./BaseComponents/BaseAlert";
 import "../assets/css/AddUserBtn.css";
+import AddEditUserForm from "./AddEditUserForm";
 
 interface Props {
   getUsersList: () => void;
@@ -95,52 +95,16 @@ function AddUserBtn(props: Props) {
         onSubmit={validateUser}
         isLoading={isLoading}
       >
-        <>
-          <h2 className="add-user__h2">Add user</h2>
-          <form className="add-user__form">
-            <label>
-              <span>First name</span>
-              <input
-                type="text"
-                value={newUserFirstName}
-                onChange={(e) => setNewUserFirstName(e.target.value)}
-                onKeyDown={handleKeypress}
-                autoFocus
-              />
-            </label>
-            <label>
-              <span>Last name</span>
-              <input
-                type="text"
-                value={newUserLastName}
-                onChange={(e) => setNewUserLastName(e.target.value)}
-                onKeyDown={handleKeypress}
-              />
-            </label>
-            <label>
-              <span>Email</span>
-              <input
-                type="text"
-                value={newUserEmail}
-                onChange={(e) => setNewUserEmail(e.target.value)}
-                onKeyDown={handleKeypress}
-              />
-            </label>
-          </form>
-          {errors.length ? (
-            <div className="add-user__alert">
-              {errors.map((error, id) => (
-                <BaseAlert
-                  key={id}
-                  alertText={error}
-                  alertType="error"
-                ></BaseAlert>
-              ))}
-            </div>
-          ) : (
-            <></>
-          )}
-        </>
+        <AddEditUserForm
+          handleKeypress={handleKeypress}
+          newUserFirstName={newUserFirstName}
+          setNewUserFirstName={setNewUserFirstName}
+          newUserLastName={newUserLastName}
+          setNewUserLastName={setNewUserLastName}
+          newUserEmail={newUserEmail}
+          setNewUserEmail={setNewUserEmail}
+          errors={errors}
+        />
       </BaseModal>
     </>
   );

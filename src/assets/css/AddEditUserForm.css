@@ -1,0 +1,43 @@
+.add-edit-user-form__form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.add-edit-user-form__form label {
+  display: grid;
+}
+
+.add-edit-user-form__form span {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.add-edit-user-form__form input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  background-color: white;
+  padding: 0.5rem;
+  outline: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.add-edit-user-form__form input:focus {
+  box-shadow: rgba(149, 157, 165, 0.3) 0px 0px 10px;
+}
+
+.add-edit-user-form__alert {
+  margin-top: 1rem;
+  max-width: 240px;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.add-edit-user-form__h2 {
+  padding: 0 0 0.5rem;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid black;
+}
