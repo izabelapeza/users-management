@@ -1,30 +1,27 @@
 import { useEffect, useState, KeyboardEvent } from "react";
 import axios from "axios";
-import { MdOutlinePersonAdd } from "react-icons/md";
-import BaseButton from "./BaseComponents/BaseButton";
+import User from "../types/user";
+import { MdModeEdit } from "react-icons/md";
 import BaseModal from "./BaseComponents/BaseModal";
 import AddEditUserForm from "./AddEditUserForm";
 import "../assets/css/AddEditUserBtn.css";
 import validateUser from "../utils/validateUser";
 
 interface Props {
+  userData: User;
   getUsersList: () => void;
 }
 
-function AddUserBtn(props: Props) {
+function EditUserBtn(props: Props) {
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
-  const [newUserFirstName, setNewUserFirstName] = useState("");
-  const [newUserLastName, setNewUserLastName] = useState("");
-  const [newUserEmail, setNewUserEmail] = useState("");
+  const [userFirstName, setUserFirstName] = useState(props.userData.firstName);
+  const [userLastName, setUserLastName] = useState(props.userData.lastName);
+  const [userEmail, setUserEmail] = useState(props.userData.email);
   const [isLoading, setIsLoading] = useState(false);
 
   const addUser = () => {
-    let errorsList = validateUser(
-      newUserFirstName,
-      newUserLastName,
-      newUserEmail
-    );
+    let errorsList = validateUser(userFirstName, userLastName, userEmail);
     if (errorsList.length > 0) {
       setErrors(errorsList);
       return;
@@ -33,10 +30,10 @@ function AddUserBtn(props: Props) {
     setIsLoading(true);
 
     axios
-      .post(import.meta.env.VITE_SERVER_URL, {
-        firstName: newUserFirstName.trim(),
-        lastName: newUserLastName.trim(),
-        email: newUserEmail.trim(),
+      .put(`${import.meta.env.VITE_SERVER_URL}/${props.userData.id}`, {
+        firstName: userFirstName.trim(),
+        lastName: userLastName.trim(),
+        email: userEmail.trim(),
       })
       .then(() => {
         props.getUsersList();
@@ -48,13 +45,13 @@ function AddUserBtn(props: Props) {
 
   useEffect(() => {
     setErrors([]);
-  }, [newUserFirstName, newUserLastName, newUserEmail]);
+  }, [userFirstName, userLastName, userEmail]);
 
   const openModal = () => {
     setErrors([]);
-    setNewUserFirstName("");
-    setNewUserLastName("");
-    setNewUserEmail("");
+    setUserFirstName(props.userData.firstName);
+    setUserLastName(props.userData.lastName);
+    setUserEmail(props.userData.email);
     setShowModal(true);
   };
 
@@ -67,12 +64,9 @@ function AddUserBtn(props: Props) {
   };
   return (
     <>
-      <BaseButton size="md" color="blue" onClick={openModal}>
-        <div className="add-edit-user__add-btn">
-          <MdOutlinePersonAdd />
-          <span>Add user</span>
-        </div>
-      </BaseButton>
+      <button onClick={openModal} className="add-edit-user__delete-btn">
+        <MdModeEdit />
+      </button>
       <BaseModal
         show={showModal}
         onClose={() => {
@@ -83,12 +77,12 @@ function AddUserBtn(props: Props) {
       >
         <AddEditUserForm
           handleKeypress={handleKeypress}
-          userFirstName={newUserFirstName}
-          setUserFirstName={setNewUserFirstName}
-          userLastName={newUserLastName}
-          setUserLastName={setNewUserLastName}
-          userEmail={newUserEmail}
-          setUserEmail={setNewUserEmail}
+          userFirstName={userFirstName}
+          setUserFirstName={setUserFirstName}
+          userLastName={userLastName}
+          setUserLastName={setUserLastName}
+          userEmail={userEmail}
+          setUserEmail={setUserEmail}
           errors={errors}
         />
       </BaseModal>
@@ -96,4 +90,4 @@ function AddUserBtn(props: Props) {
   );
 }
 
-export default AddUserBtn;
+export default EditUserBtn;

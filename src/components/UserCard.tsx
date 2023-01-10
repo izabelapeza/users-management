@@ -6,6 +6,7 @@ import BaseModal from "./BaseComponents/BaseModal";
 import BaseAlert from "./BaseComponents/BaseAlert";
 import UserAvatar from "./UserAvatar";
 import "../assets/css/UserCard.css";
+import EditUserBtn from "./EditUserBtn";
 
 interface Props {
   userData: User;
@@ -36,16 +37,19 @@ function UserCard({ userData, getUsersList }: Props) {
           <h2>{`${userData.firstName} ${userData.lastName}`}</h2>
           <p>{userData.email}</p>
         </div>
-        <button
-          className="user-card__delete-btn"
-          onClick={() => {
-            setError("");
-            setShowModal(true);
-          }}
-          aria-label="Delete user"
-        >
-          <MdClose />
-        </button>
+        <div className="user-card__btns">
+          <EditUserBtn userData={userData} getUsersList={getUsersList} />
+          <button
+            className="user-card__delete-btn"
+            onClick={() => {
+              setError("");
+              setShowModal(true);
+            }}
+            aria-label="Delete user"
+          >
+            <MdClose />
+          </button>
+        </div>
       </div>
       <BaseModal
         show={showModal}

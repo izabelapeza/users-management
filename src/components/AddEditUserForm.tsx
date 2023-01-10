@@ -4,12 +4,12 @@ import "../assets/css/AddEditUserForm.css";
 
 interface Props {
   handleKeypress: (e: KeyboardEvent<HTMLDivElement>) => void;
-  newUserFirstName: string;
-  setNewUserFirstName: (arg0: string) => void;
-  newUserLastName: string;
-  setNewUserLastName: (arg0: string) => void;
-  newUserEmail: string;
-  setNewUserEmail: (arg0: string) => void;
+  userFirstName: string;
+  setUserFirstName: (arg0: string) => void;
+  userLastName: string;
+  setUserLastName: (arg0: string) => void;
+  userEmail: string;
+  setUserEmail: (arg0: string) => void;
   errors: string[];
 }
 
@@ -22,8 +22,8 @@ function AddEditUserForm(props: Props) {
           <span>First name</span>
           <input
             type="text"
-            value={props.newUserFirstName}
-            onChange={(e) => props.setNewUserFirstName(e.target.value)}
+            value={props.userFirstName}
+            onChange={(e) => props.setUserFirstName(e.target.value)}
             onKeyDown={props.handleKeypress}
             autoFocus
           />
@@ -32,8 +32,8 @@ function AddEditUserForm(props: Props) {
           <span>Last name</span>
           <input
             type="text"
-            value={props.newUserLastName}
-            onChange={(e) => props.setNewUserLastName(e.target.value)}
+            value={props.userLastName}
+            onChange={(e) => props.setUserLastName(e.target.value)}
             onKeyDown={props.handleKeypress}
           />
         </label>
@@ -41,8 +41,8 @@ function AddEditUserForm(props: Props) {
           <span>Email</span>
           <input
             type="text"
-            value={props.newUserEmail}
-            onChange={(e) => props.setNewUserEmail(e.target.value)}
+            value={props.userEmail}
+            onChange={(e) => props.setUserEmail(e.target.value)}
             onKeyDown={props.handleKeypress}
           />
         </label>

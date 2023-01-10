@@ -1,6 +1,6 @@
 .user-card {
   display: grid;
-  grid-template-columns: auto 1fr 20px;
+  grid-template-columns: auto 1fr 40px;
   gap: 1rem;
   background-color: white;
   border-radius: 0.25rem;
@@ -54,4 +54,9 @@
 
 .user-card__modal p {
   margin: 0;
+}
+
+.user-card__btns {
+  display: flex;
+  gap: 0.25rem;
 }

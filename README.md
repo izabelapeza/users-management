@@ -1,5 +1,6 @@
 # user-management
-Basic users management tool 👤 You can view, add and delete users.
+
+Basic users management tool 👤 You can view, add, edit and delete users.
 
 ## Setup
 
